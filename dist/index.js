@@ -12,6 +12,7 @@ function hashStream (algo = 'md5', enc = 'hex') {
     },
     flush (cb) {
       hs.hash = hasher.digest(enc);
+      cb();
     }
   });
   hs.on('pipe', src => src.on('error', err => hs.emit('error', err)));

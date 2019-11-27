@@ -12,6 +12,7 @@ export default function hashStream (algo = 'md5', enc = 'hex') {
     },
     flush (cb) {
       hs.hash = hasher.digest(enc)
+      cb()
     }
   })
   // forward errors
