@@ -1,6 +1,6 @@
 {
   "name": "hash-stream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hashing transform stream",
   "main": "src/index.mjs",
   "module": "src/index.mjs",
