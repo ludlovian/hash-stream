@@ -1,28 +1,37 @@
+import { test } from 'uvu'
+import * as assert from 'uvu/assert'
+
 import { createReadStream } from 'fs'
 import { finished } from 'stream/promises'
-import test from 'ava'
 
 import hashStream from '../src/index.mjs'
 
-const file = 'test/test.mjs'
+const file = 'src/index.mjs'
 
-test('hash a stream', async t => {
+test('hash a stream', async () => {
   const hasher = hashStream()
   const dataStream = createReadStream(file)
   dataStream.pipe(hasher)
   hasher.resume()
   await finished(hasher)
-  t.snapshot(hasher.hash)
+
+  assert.is(hasher.hash, '995c5d92c6718deccf887bf57cd86c23')
 })
 
-test('errors are forwarded', async t => {
+test('errors are forwarded', async () => {
   const hasher = hashStream()
   const dataStream = createReadStream(file)
   const err = new Error('Oops')
 
   dataStream.pipe(hasher)
-  setImmediate(() => dataStream.emit('error', err))
-  await t.throwsAsync(finished(hasher), {
-    is: err
-  })
+  Promise.resolve().then(() => dataStream.emit('error', err))
+
+  await finished(hasher).then(
+    () => assert.unreachable(),
+    e => {
+      assert.is(e, err)
+    }
+  )
 })
+
+test.run()
