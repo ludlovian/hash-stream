@@ -1,5 +1,3 @@
-'use strict'
-
 import { Transform } from 'stream'
 import { createHash } from 'crypto'
 
