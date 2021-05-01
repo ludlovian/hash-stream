@@ -1,12 +1,14 @@
 # hash-stream
 Transfer stream that hashes
 
+**NOTE** You should now be using the async gen version at **/gen**
+
 ## API
 
 Only one (default) export
 
 ### hashStream
-`hs = hashStream(hash, conding)`
+`hs = hashStream({algo, enc})`
 
 Returns a transfer stream that hashes as it passes data through
 
