@@ -6,7 +6,8 @@
   "module": "src/index.mjs",
   "exports": {
     ".": "./src/index.mjs",
-    "./gen": "./src/gen.mjs"
+    "./gen": "./src/gen.mjs",
+    "./simple": "./simple.mjs"
   },
   "type": "module",
   "scripts": {
